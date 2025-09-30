@@ -46,7 +46,7 @@ colors = get(groot, 'defaultAxesColorOrder');
 
 %% ENSAYO MO1
 theta = 1;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 
 sim("TP1_SIM_R3FMO_ctrl");
@@ -92,7 +92,7 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO2
 theta = 2;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 
 sim("TP1_SIM_R3FMO_ctrl");
@@ -137,7 +137,7 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO3a
 theta = 3;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 C_snubber = 250e-9;
 
@@ -277,7 +277,7 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO6
 theta = 2;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo2;
 C_snubber = 50e-9;
 
@@ -324,7 +324,7 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO7
 theta = 3;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo2;
 C_snubber = 250e-9;
 
@@ -371,7 +371,7 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO CON t1=0, alfa=0
 theta = 1;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 t(theta,1) = 0;
 C_snubber=250e-9;
@@ -415,11 +415,11 @@ legend('it1', 'ic'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=0º, \Deltat=5%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
+    '\alpha=0º, \Deltat=35%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
 
 %% ENSAYO CON t1=0, alfa=60
 theta = 2;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 t(theta,1) = 0;
 C_snubber=250e-9;
@@ -463,11 +463,11 @@ legend('it1', 'ic'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=60º, \Deltat=5%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
+    '\alpha=60º, \Deltat=35%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
 
 %% ENSAYO CON t1=0, alfa=90
 theta = 3;
-deltat = deltat_1;
+deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 t(theta,1) = 0;
 C_snubber=250e-9;
@@ -511,7 +511,7 @@ legend('it1', 'ic'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=90º, \Deltat=5%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
+    '\alpha=90º, \Deltat=35%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
 
 %% ENSAYO CON Vt1=0
 theta = 1;
