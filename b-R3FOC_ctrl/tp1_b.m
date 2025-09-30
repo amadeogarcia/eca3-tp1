@@ -52,6 +52,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t1 = tout;
 vc1 = Vc;
 ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
 vt11 = th1(:,2);
 it11 = th1(:,1);
 vdisp1 = vdisp;
@@ -95,6 +97,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t2 = tout;
 vc2 = Vc;
 ic2 = Ic;
+ucc2 = Ucc;
+icc2 = Icc;
 vt12 = th1(:,2);
 it12 = th1(:,1);
 vdisp2 = vdisp;
@@ -138,6 +142,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t3 = tout;
 vc3 = Vc;
 ic3 = Ic;
+ucc3 = Ucc;
+icc3 = Icc;
 vt13 = th1(:,2);
 it13 = th1(:,1);
 vdisp3 = vdisp;
@@ -181,6 +187,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t4 = tout;
 vc4 = Vc;
 ic4 = Ic;
+ucc4 = Ucc;
+icc4 = Icc;
 vt14 = th1(:,2);
 it14 = th1(:,1);
 vdisp4 = vdisp;
@@ -224,6 +232,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t5 = tout;
 vc5 = Vc;
 ic5 = Ic;
+ucc5 = Ucc;
+icc5 = Icc;
 vt15 = th1(:,2);
 it15 = th1(:,1);
 vdisp5 = vdisp;
@@ -267,6 +277,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t6 = tout;
 vc6 = Vc;
 ic6 = Ic;
+ucc6 = Ucc;
+icc6 = Icc;
 vt16 = th1(:,2);
 it16 = th1(:,1);
 vdisp6 = vdisp;
@@ -310,6 +322,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t7 = tout;
 vc7 = Vc;
 ic7 = Ic;
+ucc7 = Ucc;
+icc7 = Icc;
 vt17 = th1(:,2);
 it17 = th1(:,1);
 vdisp7 = vdisp;
@@ -353,6 +367,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t8 = tout;
 vc8 = Vc;
 ic8 = Ic;
+ucc8 = Ucc;
+icc8 = Icc;
 vt18 = th1(:,2);
 it18 = th1(:,1);
 vdisp8 = vdisp;
@@ -395,6 +411,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t9 = tout;
 vc9 = Vc;
 ic9 = Ic;
+ucc9 = Ucc;
+icc9 = Icc;
 vt19 = th1(:,2);
 it19 = th1(:,1);
 vdisp9 = vdisp;
@@ -438,6 +456,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t10 = tout;
 vc10 = Vc;
 ic10 = Ic;
+ucc10 = Ucc;
+icc10 = Icc;
 vt110 = th1(:,2);
 it110 = th1(:,1);
 vdisp10 = vdisp;
@@ -481,6 +501,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t11 = tout;
 vc11 = Vc;
 ic11 = Ic;
+ucc11 = Ucc;
+icc11 = Icc;
 vt111 = th1(:,2);
 it111 = th1(:,1);
 vdisp11 = vdisp;
@@ -524,6 +546,8 @@ sim("TP1_SIM_R3FOC_ctrl");
 t12 = tout;
 vc12 = Vc;
 ic12 = Ic;
+ucc12 = Ucc;
+icc12 = Icc;
 vt112 = th1(:,2);
 it112 = th1(:,1);
 vdisp12 = vdisp;
@@ -560,18 +584,18 @@ sgtitle(['Ensayo del R3FOC controlado con: ' ...
 %% COMPARATIVA 1
 % alfa=0, Q=500 vs Q=5000
 figure;
-xmin = 0.02; xmax = 0.06;
+xmin = 0.02; xmax = 0.04;
 
 subplot(3,1,1),
 plot(tout, vs(:,1), '--'), hold on,
 plot(tout, vs(:,2), '--'), hold on,
 plot(tout, vs(:,3), '--'), hold on,
 plot(t1, vc1, t2, vc2, 'LineWidth', 1.5), hold on,
-plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:), 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
 %plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
-plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:), 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
 %plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
-plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:), 'LineWidth', 1.5), grid on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), grid on,
 %plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
 legend('vs1', 'vs2', 'vs3', 'vc(Q=500)', 'vc(Q=5000)'),
 axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
@@ -591,76 +615,602 @@ axis([xmin xmax -inf inf]),
 legend('ic(Q=500)', 'ic(Q=5000)'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
+median(ucc1)
+median(ucc2)
+median(icc1)
+median(icc2)
+
 sgtitle(['Comparacion del R3FOC controlado con: ' ...
     '\alpha=0º, \Deltat=5% para distintas Q'], 'FontWeight', 'bold');
 
 %% COMPARATIVA 2
-% alfa=60 vs alfa=90, Q=500
+% alfa=60, Q=500 vs Q=5000
 figure;
-xmin = 0.02; xmax = 0.06;
+xmin = 0.02; xmax = 0.04;
 
 subplot(3,1,1),
+plot(tout, vs(:,1), '--'), hold on,
+plot(tout, vs(:,2), '--'), hold on,
+plot(tout, vs(:,3), '--'), hold on,
+plot(t7, vc7, t8, vc8, 'LineWidth', 1.5), hold on,
+plot(t7, 200.*vdisp7(:,1), 'Color', colors(1,:)), hold on,
+%plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t7, 200.*vdisp7(:,3), 'Color', colors(2,:)), hold on,
+%plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t7, 200.*vdisp7(:,5), 'Color', colors(3,:)), grid on,
+%plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+legend('vs1', 'vs2', 'vs3', 'vc(Q=500)', 'vc(Q=5000)'),
+axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
+
+subplot(3,1,2)
+plot(tout, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(tout, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t7, vt17, t8, vt18), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1(Q=500)', 'vt1(Q=5000)')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]')
+
+subplot(3,1,3),
+%plot(t1, it11, t2, it12), hold on,
+plot(t7, ic7, t8, ic8, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('ic(Q=500)', 'ic(Q=5000)'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]');
+
+sgtitle(['Comparacion del R3FOC controlado con: ' ...
+    '\alpha=60º, \Deltat=35% para distintas Q'], 'FontWeight', 'bold');
+
+median(ucc7)
+median(ucc8)
+median(icc7)
+median(icc8)
+
+%% COMPARATIVA 3
+% alfa=90, Q=500 vs Q=5000
+figure;
+xmin = 0.02; xmax = 0.04;
+C_Snubber = 250e-9;
+
+subplot(3,1,1),
+plot(tout, vs(:,1), '--'), hold on,
+plot(tout, vs(:,2), '--'), hold on,
+plot(tout, vs(:,3), '--'), hold on,
+plot(t11, vc11, t12, vc12, 'LineWidth', 1.5), hold on,
+plot(t11, 200.*vdisp11(:,1), 'Color', colors(1,:)), hold on,
+% plot(t11, 200.*vdisp11(:,2), 'Color', colors(3,:)), hold on,
+plot(t11, 200.*vdisp11(:,3), 'Color', colors(2,:)), hold on,
+% plot(t11, 200.*vdisp11(:,4), 'Color', colors(1,:)), hold on,
+plot(t11, 200.*vdisp11(:,5), 'Color', colors(3,:)), grid on,
+% plot(t11, 200.*vdisp11(:,6), 'Color', colors(2,:)), grid on,
+legend('vs1', 'vs2', 'vs3', 'vc(Q=500)', 'vc(Q=5000)'),
+axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
+
+subplot(3,1,2)
+plot(tout, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(tout, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t11, vt111, t12, vt112), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt11(Q=500)', 'vt11(Q=5000)')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]')
+
+subplot(3,1,3),
+%plot(t11, it111, t12, it112), hold on,
+plot(t11, ic11, t12, ic12, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('ic(Q=500)', 'ic(Q=5000)'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]');
+
+sgtitle(['Comparacion del R3FOC controlado con: ' ...
+    '\alpha=90º, \Deltat=35% para distintas Q'], 'FontWeight', 'bold');
+
+median(ucc11)
+median(ucc12)
+median(icc11)
+median(icc12)
+
+%% COMPARATIVA 4
+% alfa=60, deltat_1 vs deltat_2, Q=500
+figure;
+xmin = 0.02; xmax = 0.04;
+
+subplot(2,1,1),
+plot(tout, vs(:,1), '--'), hold on,
+plot(tout, vs(:,2), '--'), hold on,
+plot(tout, vs(:,3), '--'), hold on,
+plot(t5, vc5, 'LineWidth', 1.5), hold on,
+plot(t5, 200.*vdisp5(:,1), 'Color', colors(1,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t5, 200.*vdisp5(:,3), 'Color', colors(2,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t5, 200.*vdisp5(:,5), 'Color', colors(3,:), 'LineWidth', 1), grid on,
+%plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+legend('vs1', 'vs2', 'vs3', 'vc(Q=500)'),
+axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
+
+subplot(2,1,2)
 plot(tout, vs(:,1), '--'), hold on,
 plot(tout, vs(:,2), '--'), hold on,
 plot(tout, vs(:,3), '--'), hold on,
 plot(t7, vc7, 'LineWidth', 1.5), hold on,
-plot(t7, 200.*vdisp7(:,1), 'Color', colors(1,:), 'LineWidth', 1.5), hold on,
-%plot(tout, 200.*vdisp(:,2), 'Color', colors(3,:)), hold on,
-plot(t7, 200.*vdisp7(:,3), 'Color', colors(2,:), 'LineWidth', 1.5), hold on,
-%plot(tout, 200.*vdisp(:,4), 'Color', colors(1,:)), hold on,
-plot(t7, 200.*vdisp7(:,5), 'Color', colors(3,:), 'LineWidth', 1.5), grid on,
-%plot(tout, 200.*vdisp(:,6), 'Color', colors(2,:)), grid on,
-axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
-legend('vs1', 'vs2', 'vs3', 'vc(60º)');
+plot(t7, 200.*vdisp7(:,1), 'Color', colors(1,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t7, 200.*vdisp7(:,3), 'Color', colors(2,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t7, 200.*vdisp7(:,5), 'Color', colors(3,:), 'LineWidth', 1), grid on,
+%plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+legend('vs1', 'vs2', 'vs3', 'vc(Q=500)'),
+axis([xmin xmax -inf inf]), ylabel('Tension [V]'), xlabel('Tiempo [s]')
 
-subplot(3,1,2)
-plot(tout, vs(:,1)-vs(:,3), '--k'), hold on,
-%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
-plot(tout, vs(:,1)-vs(:,2), '--r'), hold on,
-plot(t7, vt17), grid on,
+sgtitle(['Comparacion del R3FOC controlado con: ' ...
+    '\alpha=60º, Q=500VAr, para \Deltat=5% vs. \Deltat=35%'], 'FontWeight', 'bold');
 
-axis([xmin xmax -inf inf]), ylabel('Tension [V]')
-legend('vs1-vs2', 'vs1-vs3', 'vt1(60º)');
-
-subplot(3,1,3),
-%plot(t1, it11, t2, it12), hold on,
-plot(t7, ic7, 'LineWidth', 1.5), grid on,
-axis([xmin xmax -inf inf]),
-legend('ic(60º)'),
-xlabel('Tiempo [s]'), ylabel('Corriente [A]');
-
-sgtitle(['R3FOC controlado con: ' ...
-    '\alpha=60º, \Deltat=35%, Q=500VAr'], 'FontWeight', 'bold');
-
+%% COMPARATIVA 5
+% alfa=90, deltat_1 vs deltat_2, Q=500
+C_Snubber = 50e-9;
 figure;
-subplot(3,1,1),
+xmin = 0.02; xmax = 0.04;
+
+subplot(2,1,1),
+plot(tout, vs(:,1), '--'), hold on,
+plot(tout, vs(:,2), '--'), hold on,
+plot(tout, vs(:,3), '--'), hold on,
+plot(t9, vc9, 'LineWidth', 1.5), hold on,
+plot(t9, 200.*vdisp9(:,1), 'Color', colors(1,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t9, 200.*vdisp9(:,3), 'Color', colors(2,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t9, 200.*vdisp9(:,5), 'Color', colors(3,:), 'LineWidth', 1), grid on,
+%plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+legend('vs1', 'vs2', 'vs3', 'vc(Q=500)'),
+axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
+
+subplot(2,1,2)
 plot(tout, vs(:,1), '--'), hold on,
 plot(tout, vs(:,2), '--'), hold on,
 plot(tout, vs(:,3), '--'), hold on,
 plot(t11, vc11, 'LineWidth', 1.5), hold on,
-plot(t11, 200.*vdisp11(:,1), 'Color', colors(1,:), 'LineWidth', 1.5), hold on,
-%plot(tout, 200.*vdisp(:,2), 'Color', colors(3,:)), hold on,
-plot(t11, 200.*vdisp11(:,3), 'Color', colors(2,:), 'LineWidth', 1.5), hold on,
-%plot(tout, 200.*vdisp(:,4), 'Color', colors(1,:)), hold on,
-plot(t11, 200.*vdisp11(:,5), 'Color', colors(3,:), 'LineWidth', 1.5), grid on,
-%plot(tout, 200.*vdisp(:,6), 'Color', colors(2,:)), grid on,
-legend('vs1', 'vs2', 'vs3', 'vc(90º)'),
-axis([xmin xmax -inf inf]), ylabel('Tension [V]')
+plot(t11, 200.*vdisp11(:,1), 'Color', colors(1,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t11, 200.*vdisp11(:,3), 'Color', colors(2,:), 'LineWidth', 1), hold on,
+%plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t11, 200.*vdisp11(:,5), 'Color', colors(3,:), 'LineWidth', 1), grid on,
+%plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+legend('vs1', 'vs2', 'vs3', 'vc(Q=500)'),
+axis([xmin xmax -inf inf]), ylabel('Tension [V]'), xlabel('Tiempo [s]')
 
-subplot(3,1,2)
-plot(tout, vs(:,1)-vs(:,3), '--k'), hold on,
+sgtitle(['Comparacion del R3FOC controlado con: ' ...
+    '\alpha=90º, Q=500VAr, para \Deltat=5% vs. \Deltat=35%'], 'FontWeight', 'bold');
+
+%% ENSAYO CON t1=0, alfa=0
+% alfa = 0, Q = 500VAR
+theta = 1;
+deltat = deltat_1;
+P = Poc; Q = Qoc1;
+t(theta,1)=0;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.04;
+
+subplot(2,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(2,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
 %plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
-plot(tout, vs(:,1)-vs(:,2), '--r'), hold on,
-plot(t11, vt111), grid on,
-axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
-legend('vs1-vs2', 'vs1-vs3', 'vt1(90º)');
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
+
+sgtitle(['Tensiones del R3FOC controlado con: ' ...
+    '\alpha=0º, \Deltat=5%, t_1=0'], 'FontWeight', 'bold');
+
+figure;
+subplot(2,1,1),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]'),
+title('Q=500VAr');
+
+Q = Qoc2;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+subplot(2,1,2),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]'),
+title('Q=5000VAr');
+
+sgtitle(['Corrientes del R3FOC controlado con: ' ...
+    '\alpha=0º, \Deltat=5%, t_1=0'], 'FontWeight', 'bold');
+
+%% ENSAYO CON t1=0, alfa=0
+% alfa = 0, Q = 500VAR
+deltat = deltat_2;
+Q = Qoc1;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.06;
+
+subplot(3,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+% plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+% plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+% plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(3,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
 
 subplot(3,1,3),
-%plot(t1, it11, t2, it12), hold on,
-plot(t11, ic11, 'LineWidth', 1.5), grid on,
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
 axis([xmin xmax -inf inf]),
-legend('ic(90º)'),
+legend('it1', 'ic'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
-sgtitle(['R3FOC controlado con: ' ...
-    '\alpha=90º, \Deltat=35%, Q=500VAr'], 'FontWeight', 'bold');
+sgtitle(['Ensayo del R3FOC controlado con: ' ...
+    '\alpha=0º, \Deltat=35%, Q = 500VAr, t_1=0'], 'FontWeight', 'bold');
+
+%% ENSAYO CON t1=0, alfa=60
+% alfa = 0, Q = 500VAR
+theta = 2;
+deltat = deltat_2;
+P = Poc; Q = Qoc1;
+t(theta,1)=0;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.04;
+
+subplot(2,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+% plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+% plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+% plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(2,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
+
+sgtitle(['Tensiones del R3FOC controlado con: ' ...
+    '\alpha=60º, \Deltat=35%, t_1=0'], 'FontWeight', 'bold');
+
+figure;
+subplot(2,1,1),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]'),
+title('Q=500VAr');
+
+Q = Qoc2;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+subplot(2,1,2),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]'),
+title('Q=5000VAr');
+
+sgtitle(['Corrientes del R3FOC controlado con: ' ...
+    '\alpha=60º, \Deltat=35%, t_1=0'], 'FontWeight', 'bold');
+
+%% ENSAYO CON t1=0, alfa=90
+% alfa = 0, Q = 500VAR
+theta = 3;
+deltat = deltat_2;
+P = Poc; Q = Qoc1;
+t(theta,1)=0;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.04;
+
+subplot(2,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+% plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+% plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+% plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(2,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
+
+sgtitle(['Tensiones del R3FOC controlado con: ' ...
+    '\alpha=90º, \Deltat=35%, t_1=0'], 'FontWeight', 'bold');
+
+figure;
+subplot(2,1,1),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]'),
+title('Q=500VAr');
+
+Q = Qoc2;
+
+sim("TP1_SIM_R3FOC_ctrl");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+subplot(2,1,2),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]'),
+title('Q=5000VAr');
+
+sgtitle(['Corrientes del R3FOC controlado con: ' ...
+    '\alpha=90º, \Deltat=35%, t_1=0'], 'FontWeight', 'bold');
+
+%% ENSAYO CON Vt1=0, alfa=0
+% alfa = 0, Q = 500VAR
+theta=1;
+deltat = deltat_1;
+Q = Qoc1;
+
+sim("TP1_SIM_R3FOC_ctrl_FallaCC");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.06;
+
+subplot(3,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(3,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
+
+subplot(3,1,3),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]');
+
+sgtitle(['Ensayo del R3FOC controlado con: ' ...
+    'T1 en cortocircuito, Q = 500VAr'], 'FontWeight', 'bold');
+
+%% ENSAYO CON Vt1=0, alfa=60
+% alfa = 0, Q = 500VAR
+theta=2;
+deltat = deltat_1;
+Q = Qoc1;
+
+sim("TP1_SIM_R3FOC_ctrl_FallaCC");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.06;
+
+subplot(3,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(3,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
+
+subplot(3,1,3),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]');
+
+sgtitle(['Ensayo del R3FOC controlado con: ' ...
+    'T1 en cortocircuito, Q = 500VAr'], 'FontWeight', 'bold');
+
+%% ENSAYO CON Vt1=0, alfa=60
+% alfa = 0, Q = 500VAR
+theta=3;
+deltat = deltat_1;
+Q = Qoc1;
+
+sim("TP1_SIM_R3FOC_ctrl_FallaCC");
+t1 = tout;
+vc1 = Vc;
+ic1 = Ic;
+ucc1 = Ucc;
+icc1 = Icc;
+vt11 = th1(:,2);
+it11 = th1(:,1);
+vdisp1 = vdisp;
+
+figure;
+xmin = 0.02; xmax = 0.06;
+
+subplot(3,1,1),
+plot(t1, vs(:,1), '--'), hold on,
+plot(t1, vs(:,2), '--'), hold on,
+plot(t1, vs(:,3), '--'), hold on,
+plot(t1, vc1, 'LineWidth', 1.5), hold on,
+plot(t1, 200.*vdisp1(:,1), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,2), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,3), 'Color', colors(2,:)), hold on,
+plot(t1, 200.*vdisp1(:,4), 'Color', colors(1,:)), hold on,
+plot(t1, 200.*vdisp1(:,5), 'Color', colors(3,:)), hold on,
+plot(t1, 200.*vdisp1(:,6), 'Color', colors(2,:)), grid on,
+axis([xmin xmax -inf inf]),
+legend('vs1', 'vs2', 'vs3', 'vc'), ylabel('Tension [V]');
+
+subplot(3,1,2),
+plot(t1, vs(:,1)-vs(:,3), '--k'), hold on,
+%plot(tout, vs(:,2)-vs(:,1), '--'), hold on,
+plot(t1, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t1, vt11), grid on,
+legend('vs1-vs2', 'vs1-vs3', 'vt1')
+axis([xmin xmax -inf inf]), ylabel('Tension [V]');
+
+subplot(3,1,3),
+plot(t1, it11), hold on,
+plot(t1, ic1, 'LineWidth', 1.5), grid on,
+axis([xmin xmax -inf inf]),
+legend('it1', 'ic'),
+xlabel('Tiempo [s]'), ylabel('Corriente [A]');
+
+sgtitle(['Ensayo del R3FOC controlado con: ' ...
+    'T1 en cortocircuito, Q = 500VAr'], 'FontWeight', 'bold');
