@@ -34,6 +34,7 @@ end
 
 t = t ./ w0;
 
+R_snubber = 400;
 C_snubber = 50e-9;
 
 % Potencias para el R3FMO
@@ -46,7 +47,7 @@ colors = get(groot, 'defaultAxesColorOrder');
 
 %% ENSAYO MO1
 theta = 1;
-deltat = deltat_2;
+deltat = deltat_1;
 P = Pmo; Q = Qmo1;
 
 sim("TP1_SIM_R3FMO_ctrl");
@@ -60,7 +61,7 @@ it11 = th1(:,1);
 vdisp1 = vdisp;
 
 figure;
-xmin = 0.04; xmax = 0.06;
+xmin = 0.1; xmax = 0.12;
 
 subplot(3,1,1),
 plot(t1, vs(:,1), '--'), hold on,
@@ -92,7 +93,7 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO2
 theta = 2;
-deltat = deltat_2;
+deltat = deltat_1;
 P = Pmo; Q = Qmo1;
 
 sim("TP1_SIM_R3FMO_ctrl");
@@ -106,7 +107,7 @@ it12 = th1(:,1);
 vdisp2 = vdisp;
 
 figure;
-xmin = 0.02; xmax = 0.04;
+xmin = 0.1; xmax = 0.12;
 
 subplot(3,1,1),
 plot(t2, vs(:,1), '--'), hold on,
@@ -137,9 +138,10 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO3a
 theta = 3;
-deltat = deltat_2;
+deltat = deltat_1;
 P = Pmo; Q = Qmo1;
-C_snubber = 250e-9;
+R_snubber = 400;
+C_snubber = 50e-9;
 
 sim("TP1_SIM_R3FMO_ctrl");
 t3 = tout;
@@ -179,54 +181,54 @@ legend('ic(Q_1)', 'ic(Q_2)'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=90º, \Deltat=5%, Q_1=50VAR, Q_2=500VAr'], 'FontWeight', 'bold');
+    '\alpha=60º, \Deltat=5%, Q_1=50VAR, Q_2=500VAr'], 'FontWeight', 'bold');
 
 %% ENSAYO MO3b
 theta = 3;
-deltat = deltat_2;
+deltat = deltat_1;
 P = Pmo; Q = Qmo1;
-C_snubber = 250e-9;
+R_snubber = 1e5;
+C_snubber = .2e-9;
 
 sim("TP1_SIM_R3FMO_ctrl");
-t4 = tout;
-vc4 = Vc;
-ic4 = Ic;
-ucc4 = median(Ucc)
-icc4 = median(Icc)
-vt14 = th1(:,2);
-it14 = th1(:,1);
-vdisp4 = vdisp;
+t3 = tout;
+vc3 = Vc;
+ic3 = Ic;
+ucc3 = median(Ucc)
+icc3 = median(Icc)
+vt13 = th1(:,2);
+it13 = th1(:,1);
+vdisp3 = vdisp;
 
 figure;
 xmin = 0.02; xmax = 0.04;
 
 subplot(3,1,1),
-plot(t4, vs(:,1), '--'), hold on,
-plot(t4, vs(:,2), '--'), hold on,
-plot(t4, vs(:,3), '--'), hold on,
-plot(t4, vc4, 'LineWidth', 1.5), hold on,
-plot(t4, 200.*vdisp4(:,1), 'Color', colors(1,:)), hold on,
-plot(t4, 200.*vdisp4(:,2), 'Color', colors(3,:)), hold on,
-plot(t4, 200.*vdisp4(:,3), 'Color', colors(2,:)), grid on,
+plot(t3, vs(:,1), '--'), hold on,
+plot(t3, vs(:,2), '--'), hold on,
+plot(t3, vs(:,3), '--'), hold on,
+plot(t3, vc3, t7, vc7, 'LineWidth', 1.5), hold on,
+plot(t3, 200.*vdisp3(:,1), 'Color', colors(1,:)), hold on,
+plot(t3, 200.*vdisp3(:,2), 'Color', colors(3,:)), hold on,
+plot(t3, 200.*vdisp3(:,3), 'Color', colors(2,:)), grid on,
 axis([xmin xmax -inf inf]),
-legend('vs1', 'vs2', 'vs3', 'vt1', 'vc'), ylabel('Tension [V]');
+legend('vs1', 'vs2', 'vs3', 'vc(Q_1)', 'vc(Q_2)'), ylabel('Tension [V]');
 
 subplot(3,1,2),
-plot(t4, vs(:,1)-vs(:,3), '--k'), hold on,
-plot(t4, vs(:,1)-vs(:,2), '--r'), hold on,
-plot(t4, vt14), grid on,
+plot(t3, vs(:,1)-vs(:,3), '--k'), hold on,
+plot(t3, vs(:,1)-vs(:,2), '--r'), hold on,
+plot(t3, vt13, t7, vt17), grid on,
 axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
-legend('vs1-vs2', 'vs1-vs3', 'vt1');
+legend('vs1-vs2', 'vs1-vs3', 'vt1(Q_1)', 'vt1(Q_2)');
 
 subplot(3,1,3),
-plot(t4, it14), hold on,
-plot(t4, ic4, 'LineWidth', 1.5), grid on,
+plot(t3, ic3, t7, ic7, 'LineWidth', 1.5), grid on,
 axis([xmin xmax -inf inf]),
-legend('it1', 'ic'),
+legend('ic(Q_1)', 'ic(Q_2)'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=90º, \Deltat=35%, Q=50VAR'], 'FontWeight', 'bold');
+    '\alpha=60º, \Deltat=5%, Q_1=50VAR, Q_2=500VAr'], 'FontWeight', 'bold');
 
 %% ENSAYO MO5
 theta = 1;
@@ -324,9 +326,10 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 
 %% ENSAYO MO7
 theta = 3;
-deltat = deltat_2;
+deltat = deltat_1;
 P = Pmo; Q = Qmo2;
-C_snubber = 250e-9;
+R_snubber = 1e5;
+C_snubber = .2e-9;
 
 sim("TP1_SIM_R3FMO_ctrl");
 t7 = tout;
@@ -338,43 +341,44 @@ vt17 = th1(:,2);
 it17 = th1(:,1);
 vdisp7 = vdisp;
 
-figure;
-xmin = 0.02; xmax = 0.04;
-
-subplot(3,1,1),
-plot(t7, vs(:,1), '--'), hold on,
-plot(t7, vs(:,2), '--'), hold on,
-plot(t7, vs(:,3), '--'), hold on,
-plot(t7, vc7, 'LineWidth', 1.5), hold on,
-plot(t7, 200.*vdisp7(:,1), 'Color', colors(1,:)), hold on,
-plot(t7, 200.*vdisp7(:,2), 'Color', colors(3,:)), hold on,
-plot(t7, 200.*vdisp7(:,3), 'Color', colors(2,:)), grid on,
-axis([xmin xmax -inf inf]),
-legend('vs1', 'vs2', 'vs3', 'vt1', 'vc'), ylabel('Tension [V]');
-
-subplot(3,1,2),
-plot(t7, vs(:,1)-vs(:,3), '--k'), hold on,
-plot(t7, vs(:,1)-vs(:,2), '--r'), hold on,
-plot(t7, vt17), grid on,
-axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
-legend('vs1-vs2', 'vs1-vs3', 'vt1');
-
-subplot(3,1,3),
-plot(t7, it17), hold on,
-plot(t7, ic7, 'LineWidth', 1.5), grid on,
-axis([xmin xmax -inf inf]),
-legend('it1', 'ic'),
-xlabel('Tiempo [s]'), ylabel('Corriente [A]');
-
-sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=90º, \Deltat=5%, Q=500VAR'], 'FontWeight', 'bold');
+% figure;
+% xmin = 0.02; xmax = 0.04;
+% 
+% subplot(3,1,1),
+% plot(t7, vs(:,1), '--'), hold on,
+% plot(t7, vs(:,2), '--'), hold on,
+% plot(t7, vs(:,3), '--'), hold on,
+% plot(t7, vc7, 'LineWidth', 1.5), hold on,
+% plot(t7, 200.*vdisp7(:,1), 'Color', colors(1,:)), hold on,
+% plot(t7, 200.*vdisp7(:,2), 'Color', colors(3,:)), hold on,
+% plot(t7, 200.*vdisp7(:,3), 'Color', colors(2,:)), grid on,
+% axis([xmin xmax -inf inf]),
+% legend('vs1', 'vs2', 'vs3', 'vt1', 'vc'), ylabel('Tension [V]');
+% 
+% subplot(3,1,2),
+% plot(t7, vs(:,1)-vs(:,3), '--k'), hold on,
+% plot(t7, vs(:,1)-vs(:,2), '--r'), hold on,
+% plot(t7, vt17), grid on,
+% axis([xmin xmax -inf inf]), ylabel('Tension [V]'),
+% legend('vs1-vs2', 'vs1-vs3', 'vt1');
+% 
+% subplot(3,1,3),
+% plot(t7, it17), hold on,
+% plot(t7, ic7, 'LineWidth', 1.5), grid on,
+% axis([xmin xmax -inf inf]),
+% legend('it1', 'ic'),
+% xlabel('Tiempo [s]'), ylabel('Corriente [A]');
+% 
+% sgtitle(['Ensayo del R3FMO controlado con: ' ...
+%     '\alpha=90º, \Deltat=5%, Q=500VAR'], 'FontWeight', 'bold');
 
 %% ENSAYO CON t1=0, alfa=0
 theta = 1;
 deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 t(theta,1) = 0;
-C_snubber=250e-9;
+R_snubber = 1e5;
+C_snubber = .2e-9;
 
 sim("TP1_SIM_R3FMO_ctrl");
 t1 = tout;
@@ -415,14 +419,15 @@ legend('it1', 'ic'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
-    '\alpha=0º, \Deltat=35%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
+    '\alpha=0º, \Deltat=5%, Q = 50VAr, t_1=0'], 'FontWeight', 'bold');
 
 %% ENSAYO CON t1=0, alfa=60
 theta = 2;
 deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 t(theta,1) = 0;
-C_snubber=250e-9;
+R_snubber = 1e5;
+C_snubber = .2e-9;
 
 sim("TP1_SIM_R3FMO_ctrl");
 t1 = tout;
@@ -470,7 +475,8 @@ theta = 3;
 deltat = deltat_2;
 P = Pmo; Q = Qmo1;
 t(theta,1) = 0;
-C_snubber=250e-9;
+R_snubber = 1e5;
+C_snubber = .2e-9;
 
 sim("TP1_SIM_R3FMO_ctrl");
 t1 = tout;
@@ -517,14 +523,15 @@ sgtitle(['Ensayo del R3FMO controlado con: ' ...
 theta = 1;
 deltat = deltat_1;
 P = Pmo; Q = Qmo1;
-C_snubber=250e-9;
+R_snubber = 1e5;
+C_snubber = .2e-9;
 
 sim("TP1_SIM_R3FMO_ctrl_FallaCC.slx");
 t1 = tout;
 vc1 = Vc;
 ic1 = Ic;
 ucc1 = median(Ucc)
-icc1 = median(Icc)
+icc1 = median(Icc)  
 vt11 = th1(:,2);
 it11 = th1(:,1);
 vdisp1 = vdisp;
@@ -552,9 +559,10 @@ legend('vs1-vs2', 'vs1-vs3', 'vt1');
 
 subplot(3,1,3),
 plot(t1, it11), hold on,
+plot(t1, -is1), hold on,
 plot(t1, ic1, 'LineWidth', 1.5), grid on,
 axis([xmin xmax -inf inf]),
-legend('it1', 'ic'),
+legend('it1', 'If(A)', 'ic'),
 xlabel('Tiempo [s]'), ylabel('Corriente [A]');
 
 sgtitle(['Ensayo del R3FMO controlado con: ' ...
